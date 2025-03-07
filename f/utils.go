@@ -5,6 +5,10 @@ import (
 )
 
 // GetTimestampHoursAgo 获取多少小时前的时间戳,十位
+/*
+ * @param hours 小时数
+ * @return int64 时间戳
+ */
 func GetTimestampHoursAgo(hours int) int64 {
 	// 获取当前时间
 	now := time.Now()

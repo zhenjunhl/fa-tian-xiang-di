@@ -5,6 +5,11 @@ import (
 )
 
 // WriteToFileIfExists 写入文件
+/*
+ * @param filePath 文件路径
+ * @param content 内容
+ * @return void
+ */
 func WriteToFileIfExists(
 	filePath string,
 	content string,
