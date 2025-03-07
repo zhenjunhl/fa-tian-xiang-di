@@ -1,4 +1,4 @@
-package tString
+package f
 
 import (
 	"github.com/bytedance/sonic"
