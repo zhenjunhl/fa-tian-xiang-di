@@ -15,3 +15,7 @@ func TestMergeAndDeduplicateStrings(t *testing.T) {
 	strings := f.MergeAndDeduplicateStrings([]string{"1", "2"}, []string{"2", "3"})
 	log.Println(strings)
 }
+func TestName(t *testing.T) {
+	var a = "ABCD"
+	log.Println(a[:2])
+}
