@@ -17,11 +17,12 @@ func TestName(t *testing.T) {
 }
 func TestParseFile(t *testing.T) {
 	type name struct {
-		ID int64 `json:"_id"`
+		ID    int64  `json:"_id"`
+		Input string `json:"input"`
 	}
-	file, err := f.ParseFile[name]("./json.json", "json")
+	file, err := f.ParseFile[name]("/Users/bytedance/code/byteFaas/ai-insights-webscoket/biz/local/BN32517/json.json", "json")
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(file)
+	log.Println(file[0])
 }
