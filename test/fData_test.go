@@ -16,11 +16,10 @@ func TestName(t *testing.T) {
 	log.Println(a[:2])
 }
 func TestParseFile(t *testing.T) {
-	type name struct {
-		ID    int64  `json:"_id"`
-		Input string `json:"input"`
+	type GeneralAnnotationRecordType struct {
+		Id int64 `json:"id"`
 	}
-	file, err := f.ParseFile[name]("/Users/bytedance/code/byteFaas/ai-insights-webscoket/biz/local/BN32517/json.json", "json")
+	file, err := f.ParseFile[GeneralAnnotationRecordType]("aas", "json")
 	if err != nil {
 		log.Fatal(err)
 	}

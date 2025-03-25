@@ -6,12 +6,8 @@ import (
 	"os"
 )
 
-func ParseFile[T any](filePath, fileType string) ([]T, error) {
-	var result []T
-	file, err := os.Open(filePath)
-	if err != nil {
-		return result, errors.New("打开文件失败")
-	}
+func ParseFile[T any](filePath, fileType string) ([]*T, error) {
+	result := make([]*T, 0)
 	switch fileType {
 	case "json":
 		// 得倒文件内容
@@ -27,6 +23,5 @@ func ParseFile[T any](filePath, fileType string) ([]T, error) {
 	default:
 		return result, errors.New("不支持的文件类型")
 	}
-	defer file.Close()
 	return result, nil
 }
