@@ -1,27 +1,27 @@
 package f
 
 // SplitNumberByArr 将数字拆分为10个数字，总和为n,前9个数字相同，最后一位保证等于n
-func SplitNumberByArr(n int64) []int64 {
-	if n < 10 {
+func SplitNumberByArr(n int64, s int64) []int64 {
+	if n < s {
 		return []int64{n}
 	}
-	base := n / 10
-	rem := n % 10
-	result := make([]int64, 10)
+	base := n / s
+	rem := n % s
+	result := make([]int64, s)
 	if rem == 0 {
-		for i := 0; i < 10; i++ {
+		for i := 0; i < int(s); i++ {
 			result[i] = base
 		}
-	} else if rem < 9 {
-		for i := 0; i < 9; i++ {
+	} else if rem < s-1 {
+		for i := 0; i < int(s-1); i++ {
 			result[i] = base
 		}
-		result[9] = base + rem
+		result[s-1] = base + rem
 	} else {
-		for i := 0; i < 9; i++ {
+		for i := 0; i < int(s-1); i++ {
 			result[i] = base + 1
 		}
-		result[9] = base + (rem - 9)
+		result[s-1] = base + (rem - s - 1)
 	}
 	return result
 }
