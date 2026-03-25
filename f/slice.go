@@ -20,6 +20,13 @@ func Uniq[T comparable, Slice ~[]T](collection Slice) Slice {
 
 	return result
 }
+
+// CalcPageSize /**
+//   - @description: 计算分页大小
+//   - @param {int} total 总条数
+//   - @param {int} page 每页大小
+//   - @return {int} 总页数
+//     */
 func CalcPageSize(total int, page int) int {
 	// 非法页数直接返回 0
 	if page <= 0 {
