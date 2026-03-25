@@ -20,3 +20,15 @@ func Uniq[T comparable, Slice ~[]T](collection Slice) Slice {
 
 	return result
 }
+func CalcPageSize(total int, page int) int {
+	// 非法页数直接返回 0
+	if page <= 0 {
+		return 0
+	}
+	// 刚好整除
+	if total%page == 0 {
+		return total / page
+	}
+	// 不整除 → 向上取整（最后一页不满也算一页）
+	return total/page + 1
+}
