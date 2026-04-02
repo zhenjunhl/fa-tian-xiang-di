@@ -42,3 +42,61 @@ func WriteToFileIfExists(
 		return
 	}
 }
+
+// ReadCSVToStruct 解析CSV
+/*
+ * @param filePath 文件路径
+ */
+func ReadCSVToStruct[T any](filePath string) ([]T, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+	reader.LazyQuotes = true
+
+	allRecords, err := reader.ReadAll()
+	if err != nil {
+		return nil, err
+	}
+
+	if len(allRecords) <= 1 {
+		return []T{}, nil
+	}
+
+	headers := allRecords[0]
+	headerIndex := make(map[string]int)
+	for i, header := range headers {
+		headerIndex[header] = i
+	}
+
+	var result []T
+	tType := reflect.TypeOf((*T)(nil)).Elem()
+
+	for i := 1; i < len(allRecords); i++ {
+		record := allRecords[i]
+		item := reflect.New(tType).Elem()
+
+		for j := 0; j < tType.NumField(); j++ {
+			field := tType.Field(j)
+			csvTag := field.Tag.Get("csv")
+			if csvTag == "" {
+				csvTag = field.Name
+			}
+
+			if idx, ok := headerIndex[csvTag]; ok && idx < len(record) {
+				fieldValue := item.Field(j)
+				if fieldValue.CanSet() {
+					fieldValue.SetString(record[idx])
+				}
+			}
+		}
+
+		result = append(result, item.Interface().(T))
+	}
+
+	return result, nil
+}
+
