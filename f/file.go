@@ -58,7 +58,7 @@ func ReadCSVToStruct[T any](filePath string) ([]T, error) {
 
 	reader := csv.NewReader(file)
 	reader.LazyQuotes = true
-
+reader.FieldsPerRecord = -1 
 	allRecords, err := reader.ReadAll()
 	if err != nil {
 		return nil, err
